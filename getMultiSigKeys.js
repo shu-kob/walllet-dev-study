@@ -2,7 +2,9 @@ const bitcoin = require('bitcoinjs-lib');
 const bip32 = require('bip32');
 const bip39 = require('bip39');
 const fs = require("fs");
-const { mnemonic } = require('./mnemonic.json');
+const { mnemonic1 } = require('./mnemonic1.json');
+const { mnemonic2 } = require('./mnemonic2.json');
+const { mnemonic3 } = require('./mnemonic3.json');
 const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
 
@@ -55,6 +57,7 @@ const path = `m/${purpose}'/${coinType}'/${account}'`
 console.log("path:\n" + path);
 
 function getXprivXpubfromMnemonic(mnemonic) {
+    console.log("mnemonic: " + mnemonic);
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const node = bip32.fromSeed(seed, bitcoinNetwork);
     const xpriv = node.derivePath(path).toBase58();
@@ -62,18 +65,42 @@ function getXprivXpubfromMnemonic(mnemonic) {
     return { xpriv, xpub };
 }
 
-const { xpriv, xpub } = getXprivXpubfromMnemonic(mnemonic);
+const key1 = getXprivXpubfromMnemonic(mnemonic1);
+const xpriv1 = key1.xpriv;
+const xpub1 = key1.xpub;
+const key2 = getXprivXpubfromMnemonic(mnemonic2);
+const xpriv2 = key2.xpriv;
+const xpub2 = key2.xpub;
+const key3 = getXprivXpubfromMnemonic(mnemonic3);
+const xpriv3 = key3.xpriv;
+const xpub3 = key3.xpub;
 
-const xprivData = `{\n  "xpriv": "${xpriv}"\n}`
+const xpriv1Data = `{\n  "xpriv1": "${xpriv1}"\n}`
 
-fs.writeFile("xpriv.json", xprivData, (err) => {
+fs.writeFile("xpriv1.json", xpriv1Data, (err) => {
     if (err) throw err;
-    console.log("xpriv:\n" + xpriv);
+    console.log("xpriv1:\n" + xpriv1);
 });
 
-const xpubData = `{\n  "xpub": "${xpub}"\n}`
+const xpriv2Data = `{\n  "xpriv2": "${xpriv2}"\n}`
 
-fs.writeFile("xpub.json", xpubData, (err) => {
+fs.writeFile("xpriv2.json", xpriv2Data, (err) => {
     if (err) throw err;
-    console.log("xpub:\n" + xpub);
+    console.log("xpriv2:\n" + xpriv2);
+});
+
+const xpriv3Data = `{\n  "xpriv3": "${xpriv3}"\n}`
+
+fs.writeFile("xpriv3.json", xpriv3Data, (err) => {
+    if (err) throw err;
+    console.log("xpriv3:\n" + xpriv3);
+});
+
+const xpubData = `{\n  "xpub1": "${xpub1}",\n  "xpub2": "${xpub2}",\n  "xpub3": "${xpub3}"\n}`
+
+fs.writeFile("xpubs.json", xpubData, (err) => {
+    if (err) throw err;
+    console.log("xpub1:\n" + xpub1);
+    console.log("xpub2:\n" + xpub2);
+    console.log("xpub3:\n" + xpub3);
 });

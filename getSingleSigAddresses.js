@@ -4,8 +4,10 @@ const bip39 = require('bip39');
 const { xpub } = require('./xpub.json');
 const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
-// let bitcoinNetwork = MAINNET;
-let bitcoinNetwork = TESTNET;
+let bitcoinNetwork = TESTNET; // MAINNET or TESTNET
+
+let nonChangeAddress = 0;
+let changeAddress = 1;
 
 function getPublicKey(xpub, isChange, addressIndex){
     const pubkeyNode = bitcoin.bip32.fromBase58(xpub, bitcoinNetwork);
@@ -33,34 +35,38 @@ function getP2wpkhAddress(xpub, isChange, addressIndex){
     return address;
 }
 
+let isChange = nonChangeAddress;
 
-let nonChangeAddress = 0;
-let changeAddress = 1;
+console.log("Non Change Addresses");
 
 for (let addressIndex = 0; addressIndex < 5; addressIndex++){
     console.log("addressIndex: " + addressIndex);
 
-    const p2pkhAddress = getP2pkhAddress(xpub, nonChangeAddress, addressIndex);
-    console.log("P2PKH:");
-    console.log(p2pkhAddress);
+    const p2pkhAddress = getP2pkhAddress(xpub, isChange, addressIndex);
+    console.log("P2PKH:\n" + p2pkhAddress);
 
-    const p2pkhChangeAddress = getP2pkhAddress(xpub, changeAddress, addressIndex);
-    console.log("change:");
-    console.log(p2pkhChangeAddress);
+    const p2shP2wpkhAddress = getP2shP2wpkhAddress(xpub, isChange, addressIndex);
+    console.log("P2SH-P2WPKH:\n" + p2shP2wpkhAddress);
 
-    const p2shP2wpkhAddress = getP2shP2wpkhAddress(xpub, nonChangeAddress, addressIndex);
-    console.log("P2SH-P2WPKH:");
-    console.log(p2shP2wpkhAddress);
+    const p2wpkhAddress = getP2wpkhAddress(xpub, isChange, addressIndex);
+    console.log("P2WPKH:\n" + p2wpkhAddress);
+}
 
-    const p2shP2wpkhChangeAddress = getP2shP2wpkhAddress(xpub, changeAddress, addressIndex);
-    console.log("change:");
-    console.log(p2shP2wpkhChangeAddress);
+console.log("\n");
 
-    const p2wpkhAddress = getP2wpkhAddress(xpub, nonChangeAddress, addressIndex);
-    console.log("P2WPKH:");
-    console.log(p2wpkhAddress);
+isChange = changeAddress;
 
-    const p2wpkhChangeAddress = getP2wpkhAddress(xpub, changeAddress, addressIndex);
-    console.log("change:");
-    console.log(p2wpkhChangeAddress);
+console.log("Change Addresses");
+
+for (let addressIndex = 0; addressIndex < 5; addressIndex++){
+    console.log("addressIndex: " + addressIndex);
+
+    const p2pkhAddress = getP2pkhAddress(xpub, isChange, addressIndex);
+    console.log("P2PKH:\n" + p2pkhAddress);
+
+    const p2shP2wpkhAddress = getP2shP2wpkhAddress(xpub, isChange, addressIndex);
+    console.log("P2SH-P2WPKH:\n" + p2shP2wpkhAddress);
+
+    const p2wpkhAddress = getP2wpkhAddress(xpub, isChange, addressIndex);
+    console.log("P2WPKH:\n" + p2wpkhAddress);
 }

@@ -2,15 +2,15 @@ const bitcoin = require('bitcoinjs-lib');
 const bip32 = require('bip32');
 const bip39 = require('bip39');
 const wif = require('wif');
-const {xpub1, xpub2, xpub3} = require('./xpubs.json');
+const { xpub1, xpub2, xpub3 } = require('./xpubs.json');
 const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
 // let bitcoinNetwork = MAINNET;
 let bitcoinNetwork = TESTNET;
 
-const xpriv1 = require('./xpriv1.json').xpriv;
-const xpriv2 = require('./xpriv2.json').xpriv;
-const xpriv3 = require('./xpriv3.json').xpriv;
+const { xpriv1 } = require('./xpriv1.json');
+const { xpriv2 } = require('./xpriv2.json');
+const { xpriv3 } = require('./xpriv3.json');
 
 let addressIndex = 0;
 

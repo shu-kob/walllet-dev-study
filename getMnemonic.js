@@ -1,5 +1,5 @@
-const bitcoin = require('bitcoinjs-lib');
 const bip39 = require('bip39');
+const fs = require("fs");
 
 function mnemonicToXprivXpub() {
     const mnemonic = bip39.generateMnemonic(256);
@@ -7,5 +7,10 @@ function mnemonicToXprivXpub() {
 }
 
 const mnemonic = mnemonicToXprivXpub();
-console.log("mnemonic:");
-console.log(mnemonic);
+
+const data = `{\n  "mnemonic": "${mnemonic}"\n}`
+
+fs.writeFile("mnemonic.json", data, (err) => {
+    if (err) throw err;
+    console.log("mnemonic:\n" + mnemonic);
+});

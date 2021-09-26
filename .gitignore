@@ -1,2 +1,5 @@
 package-lock.json
 node_modules/
+mnemonic.json
+xpriv.json
+xpub.json

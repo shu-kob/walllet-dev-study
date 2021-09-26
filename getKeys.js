@@ -8,11 +8,26 @@ const TESTNET = bitcoin.networks.testnet;
 // let bitcoinNetwork = MAINNET;
 let bitcoinNetwork = TESTNET;
 
+let coinType = null;
+
+if (bitcoinNetwork == MAINNET) {
+    coinType = "0";
+}
+else if (bitcoinNetwork == TESTNET) {
+    coinType = "1";
+}
+
+let account = "0"
+
+const path = `m/44'/${coinType}'/${account}'`
+
+console.log("path:\n" + path);
+
 function getXprivXpubfromMnemonic() {
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const node = bip32.fromSeed(seed, bitcoinNetwork);
-    const xpriv = node.derivePath("m/44'/1'/0'").toBase58();
-    const xpub = node.derivePath("m/44'/1'/0'").neutered().toBase58();
+    const xpriv = node.derivePath(path).toBase58();
+    const xpub = node.derivePath(path).neutered().toBase58();
     return { xpriv, xpub };
 }
 

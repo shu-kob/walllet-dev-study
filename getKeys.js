@@ -54,7 +54,7 @@ const path = `m/${purpose}'/${coinType}'/${account}'`
 
 console.log("path:\n" + path);
 
-function getXprivXpubfromMnemonic() {
+function getXprivXpubfromMnemonic(mnemonic) {
     const seed = bip39.mnemonicToSeedSync(mnemonic);
     const node = bip32.fromSeed(seed, bitcoinNetwork);
     const xpriv = node.derivePath(path).toBase58();
@@ -62,7 +62,7 @@ function getXprivXpubfromMnemonic() {
     return { xpriv, xpub };
 }
 
-const { xpriv, xpub } = getXprivXpubfromMnemonic();
+const { xpriv, xpub } = getXprivXpubfromMnemonic(mnemonic);
 
 const xprivData = `{\n  "xpriv": "${xpriv}"\n}`
 

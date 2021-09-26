@@ -9,3 +9,24 @@ cd walllet-dev-study
 
 npm install
 ```
+
+
+### シングルシグの鍵とアドレスを生成する場合
+
+```
+node getMnemonic.js
+
+node getKeys.js
+
+node getSingleSigAddresses.js
+```
+
+### マルチシグの鍵とアドレスを生成する場合
+
+```
+getMnemonic.js
+
+getMultiSigKeys.js
+
+getSingleSigAddresses.js
+```

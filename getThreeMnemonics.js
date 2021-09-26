@@ -28,7 +28,7 @@ const mnemonic3 = mnemonicToXprivXpub();
 
 const data3 = `{\n  "mnemonic": "${mnemonic3}"\n}`
 
-fs.writeFile("mnemonic3.json", data2, (err) => {
+fs.writeFile("mnemonic3.json", data3, (err) => {
     if (err) throw err;
     console.log("mnemonic3:\n" + mnemonic3);
 });

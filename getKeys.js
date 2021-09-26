@@ -38,6 +38,9 @@ let coinType = null;
 if (bitcoinNetwork == MAINNET) {
     coinType = "0";
 }
+else if (bitcoinNetwork == TESTNET) {
+    coinType = "1";
+}
 else if (bitcoinNetwork == LITECOIN) {
     coinType = "2";
 }

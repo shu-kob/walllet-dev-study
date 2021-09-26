@@ -2,9 +2,9 @@ const bitcoin = require('bitcoinjs-lib');
 const bip32 = require('bip32');
 const bip39 = require('bip39');
 const fs = require("fs");
-const mnemonic1 = require('./mnemonic1.json');
-const mnemonic2 = require('./mnemonic2.json');
-const mnemonic3 = require('./mnemonic3.json');
+const { mnemonic1 } = require('./mnemonic1.json');
+const { mnemonic2 } = require('./mnemonic2.json');
+const { mnemonic3 } = require('./mnemonic3.json');
 const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
 
@@ -65,13 +65,13 @@ function getXprivXpubfromMnemonic(mnemonic) {
     return { xpriv, xpub };
 }
 
-const key1 = getXprivXpubfromMnemonic(mnemonic1.mnemonic);
+const key1 = getXprivXpubfromMnemonic(mnemonic1);
 const xpriv1 = key1.xpriv;
 const xpub1 = key1.xpub;
-const key2 = getXprivXpubfromMnemonic(mnemonic2.mnemonic);
+const key2 = getXprivXpubfromMnemonic(mnemonic2);
 const xpriv2 = key2.xpriv;
 const xpub2 = key2.xpub;
-const key3 = getXprivXpubfromMnemonic(mnemonic3.mnemonic);
+const key3 = getXprivXpubfromMnemonic(mnemonic3);
 const xpriv3 = key3.xpriv;
 const xpub3 = key3.xpub;
 

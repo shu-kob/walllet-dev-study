@@ -8,7 +8,7 @@ function mnemonicToXprivXpub() {
 
 const mnemonic1 = mnemonicToXprivXpub();
 
-const data1 = `{\n  "mnemonic": "${mnemonic1}"\n}`
+const data1 = `{\n  "mnemonic1": "${mnemonic1}"\n}`
 
 fs.writeFile("mnemonic1.json", data1, (err) => {
     if (err) throw err;
@@ -17,7 +17,7 @@ fs.writeFile("mnemonic1.json", data1, (err) => {
 
 const mnemonic2 = mnemonicToXprivXpub();
 
-const data2 = `{\n  "mnemonic": "${mnemonic2}"\n}`
+const data2 = `{\n  "mnemonic2": "${mnemonic2}"\n}`
 
 fs.writeFile("mnemonic2.json", data2, (err) => {
     if (err) throw err;
@@ -26,7 +26,7 @@ fs.writeFile("mnemonic2.json", data2, (err) => {
 
 const mnemonic3 = mnemonicToXprivXpub();
 
-const data3 = `{\n  "mnemonic": "${mnemonic3}"\n}`
+const data3 = `{\n  "mnemonic3": "${mnemonic3}"\n}`
 
 fs.writeFile("mnemonic3.json", data3, (err) => {
     if (err) throw err;

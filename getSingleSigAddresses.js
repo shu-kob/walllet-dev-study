@@ -6,6 +6,9 @@ const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
 let bitcoinNetwork = TESTNET; // MAINNET or TESTNET
 
+let nonChangeAddress = 0;
+let changeAddress = 1;
+
 function getPublicKey(xpub, isChange, addressIndex){
     const pubkeyNode = bitcoin.bip32.fromBase58(xpub, bitcoinNetwork);
     const pubkey = pubkeyNode.derive(isChange).derive(addressIndex).publicKey;
@@ -32,8 +35,6 @@ function getP2wpkhAddress(xpub, isChange, addressIndex){
     return address;
 }
 
-
-let nonChangeAddress = 0;
 let isChange = nonChangeAddress;
 
 console.log("Non Change Addresses");
@@ -53,7 +54,6 @@ for (let addressIndex = 0; addressIndex < 5; addressIndex++){
 
 console.log("\n");
 
-let changeAddress = 1;
 isChange = changeAddress;
 
 console.log("Change Addresses");

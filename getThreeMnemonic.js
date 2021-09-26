@@ -8,7 +8,7 @@ function mnemonicToXprivXpub() {
 
 const mnemonic1 = mnemonicToXprivXpub();
 
-const data1 = `{\n  "mnemonic1": "${mnemonic1}"\n}`
+const data1 = `{\n  "mnemonic": "${mnemonic1}"\n}`
 
 fs.writeFile("mnemonic1.json", data1, (err) => {
     if (err) throw err;

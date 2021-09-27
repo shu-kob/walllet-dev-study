@@ -76,7 +76,7 @@ console.log("Change Addresses");
 for (let addressIndex = 0; addressIndex < 5; addressIndex++){
 
     let addressPath = `m/${purpose}'/${coinType}'/${account}'/${isChange}/${addressIndex}`
-    console.log("addressPath:\n" + addressPath);
+    console.log("addressPath: " + addressPath);
 
     const p2pkhAddress = getP2pkhAddress(xpub, isChange, addressIndex);
     console.log("P2PKH:\n" + p2pkhAddress);

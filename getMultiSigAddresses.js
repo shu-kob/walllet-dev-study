@@ -90,7 +90,7 @@ console.log("Change Addresses");
 for (let addressIndex = 0; addressIndex < 5; addressIndex++){
 
     let addressPath = `m/${purpose}'/${coinType}'/${account}'/${isChange}/${addressIndex}`
-    console.log("addressPath:\n" + addressPath);
+    console.log("addressPath: " + addressPath);
 
     const p2shAddress = getP2shAddress(xpub1, xpub2, xpub3, isChange, addressIndex);
     console.log("P2SH:\n" + p2shAddress);

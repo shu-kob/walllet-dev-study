@@ -6,6 +6,19 @@ const MAINNET = bitcoin.networks.bitcoin;
 const TESTNET = bitcoin.networks.testnet;
 let bitcoinNetwork = TESTNET; // MAINNET or TESTNET
 
+let purpose = "44"
+
+let coinType = null;
+
+if (bitcoinNetwork == MAINNET) {
+    coinType = "0";
+}
+else if (bitcoinNetwork == TESTNET) {
+    coinType = "1";
+}
+
+let account = "0"
+
 let nonChangeAddress = 0;
 let changeAddress = 1;
 
@@ -40,7 +53,9 @@ let isChange = nonChangeAddress;
 console.log("Non Change Addresses");
 
 for (let addressIndex = 0; addressIndex < 5; addressIndex++){
-    console.log("addressIndex: " + addressIndex);
+
+    let addressPath = `m/${purpose}'/${coinType}'/${account}'/${isChange}/${addressIndex}`
+    console.log("addressPath:\n" + addressPath);
 
     const p2pkhAddress = getP2pkhAddress(xpub, isChange, addressIndex);
     console.log("P2PKH:\n" + p2pkhAddress);
@@ -59,7 +74,9 @@ isChange = changeAddress;
 console.log("Change Addresses");
 
 for (let addressIndex = 0; addressIndex < 5; addressIndex++){
-    console.log("addressIndex: " + addressIndex);
+
+    let addressPath = `m/${purpose}'/${coinType}'/${account}'/${isChange}/${addressIndex}`
+    console.log("addressPath:\n" + addressPath);
 
     const p2pkhAddress = getP2pkhAddress(xpub, isChange, addressIndex);
     console.log("P2PKH:\n" + p2pkhAddress);

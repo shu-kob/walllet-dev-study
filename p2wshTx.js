@@ -17,8 +17,7 @@ let addressIndex = 0;
 function getPrivkeyFromXpriv(xpriv, addressIndex) {
     const privkeyNode = bitcoin.bip32.fromBase58(xpriv, bitcoinNetwork);
     const privateKey_wif = privkeyNode.derive(0).derive(addressIndex).toWIF();
-    console.log("privateKey_wif:");
-    console.log(privateKey_wif);
+    console.log("privateKey_wif:\n" + privateKey_wif);
     const obj = wif.decode(privateKey_wif);
     const privkey = bitcoin.ECPair.fromPrivateKey(obj.privateKey);
     return privkey;
@@ -45,15 +44,8 @@ const p2ms = bitcoin.payments.p2ms({
       Buffer.from(pubkey3, 'hex'),
     ], network: bitcoinNetwork})
 
-console.log('Witness script:')
-console.log(p2ms.output.toString('hex'))
-
 const p2wsh = bitcoin.payments.p2wsh({redeem: p2ms, network: bitcoinNetwork})
-console.log('P2WSH address')
-console.log(p2wsh.address) 
-
-console.log("p2wsh.redeem.output")
-console.log(p2wsh.redeem.output)
+console.log('P2WSH address:\n' + p2wsh.address);
 
 const psbt = new bitcoin.Psbt({ network: bitcoinNetwork });
 psbt.addInput({
@@ -81,8 +73,6 @@ psbt.validateSignaturesOfInput(0, Buffer.from(pubkey1, 'hex'))
 psbt.validateSignaturesOfInput(0, Buffer.from(pubkey2, 'hex'))
 psbt.finalizeAllInputs();
 
-console.log(JSON.stringify(psbt))
-
 const txHex = psbt.extractTransaction().toHex();
 
-console.log(txHex);
+console.log("RawTx:\n" + txHex);

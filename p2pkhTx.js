@@ -13,6 +13,7 @@ const { xpriv } = require('./xpriv.json');
 function getPrivKey(xpriv, addressIndex){
     const privkeyNode = bitcoin.bip32.fromBase58(xpriv, bitcoinNetwork);
     const privateKey_wif = privkeyNode.derive(0).derive(addressIndex).toWIF();
+    console.log("privateKey_wif:\n" + privateKey_wif);
     const obj = wif.decode(privateKey_wif);
     const privKey = bitcoin.ECPair.fromPrivateKey(obj.privateKey);
     return privKey;
@@ -30,8 +31,7 @@ const pubkey = getPubkeyFromXpub(xpub, 0);
 
 const p2pkh = bitcoin.payments.p2pkh({ pubkey: pubkey, network: bitcoinNetwork, });
 
-console.log('P2PKH address')
-console.log(p2pkh.address) 
+console.log('P2PKH address:\n' + p2pkh.address);
 
 const psbt = new bitcoin.Psbt({ network: bitcoinNetwork });
 
@@ -57,4 +57,4 @@ psbt.validateSignaturesOfInput(0);
 psbt.finalizeAllInputs();
 const txHex = psbt.extractTransaction().toHex();
 
-console.log(txHex);
+console.log("RawTx:\n" + txHex);

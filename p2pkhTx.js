@@ -19,7 +19,9 @@ function getPrivKey(xpriv, addressIndex){
     return privKey;
 }
 
-const privkey = getPrivKey(xpriv, 0);
+const privkey0 = getPrivKey(xpriv, 0);
+const privkey1 = getPrivKey(xpriv, 1);
+const privkey2 = getPrivKey(xpriv, 2);
 
 function getPubkeyFromXpub(xpub, addressIndex) {
     const pubkeyNode = bitcoin.bip32.fromBase58(xpub, bitcoinNetwork);
@@ -27,31 +29,41 @@ function getPubkeyFromXpub(xpub, addressIndex) {
     return pubkey;
 }
 
-const pubkey = getPubkeyFromXpub(xpub, 0);
-
-const p2pkh = bitcoin.payments.p2pkh({ pubkey: pubkey, network: bitcoinNetwork, });
-
-console.log('P2PKH address:\n' + p2pkh.address);
+const pubkey0 = getPubkeyFromXpub(xpub, 0);
+const pubkey1 = getPubkeyFromXpub(xpub, 1);
+const pubkey2 = getPubkeyFromXpub(xpub, 2);
 
 const psbt = new bitcoin.Psbt({ network: bitcoinNetwork });
 
-const previousRawTx = '02000000000101f304b0cafd1952a5c7a3b6d619ae9173f424a4b7000afd3c89f1ac67c82110f80000000000feffffff024900db6e0000000016001409ca517ba74eda1fab54c0d0043b27c78210586c80969800000000001976a914fb23ae770e5d197906490e6c0f6ce0f8a6e4b37b88ac0247304402201315d79361737c2e3848fc517eabf5c6b99f1c26ec913281f2a280f5ace81929022041f24a6fc5bb28f16df7a44e9ecd0d4d3c87c960ec3e8733f8fde2244b07a892012103925f4130e79ad21f89cac35c00b0db53a3465387a388f04cb99ffdf07f3f65108dd50000';
+const previousRawTx = '020000000001019a4a640a5af86e82d5b8b9339156cc24fb5f290e19b99b58aa20508fd3cf31f10000000023220020b9489d2d8d91400a0fe666c32f7f5efe371334ae85382eb27f3fce2aaa6f0935ffffffff0400093d00000000001976a9148a7089ae260d6d5d3922d642ea05b577ae0bf8ba88aca0f01900000000001976a914263764c95da84aa2324ff65ec092f1d4d1af60d888ac400d0300000000001976a9146fbfb9e2b678fea2b9300ae8285ec6e01855ee9088ac848501000000000017a9144927691d3824f9906de54aaded6d08c7d44421008704004830450221008c8454354cbdcb426acdc5934c224704916c45d10ea6eeb2b74b13e71385ad8502204fd58d62fc2a8de9ab39245479a5217f6a7558a137c8a47f1226ac35b127b8fa01483045022100c1615d91a2dbacff54d346079aae66fdac265ef37bbe815b7fe1310a34548ad202207abf2facf05dd3da880b0e06c8bb7e20e605365725d694a76a9d9a9d1411626f01695221021d0abb918de315b7714b97d37a8105a271ad2d291e2c4eb5042ab50ab545494f2102bc527ea1d670def3afc5f60b36b7f194510c8d54568468845f061f77e4bf2a032102d0a09bd913cb01f44a7c656bab9a8b80b648c24139d039af8d01aed5679f8e6153ae00000000';
 
 psbt.addInput({
-    hash: '41d06def7a269eb60c7a243a036948777d53ebfdf3ddf721333005d2724121bf',
+    hash: '900b72ca70b8fea9cea4dd8fa0cbb3650da0a4a5ac04f18f1c5048d2c853cd8d',
+    index: 0,
+    nonWitnessUtxo: Buffer.from(previousRawTx, 'hex'),
+});
+psbt.addInput({
+    hash: '900b72ca70b8fea9cea4dd8fa0cbb3650da0a4a5ac04f18f1c5048d2c853cd8d',
     index: 1,
     nonWitnessUtxo: Buffer.from(previousRawTx, 'hex'),
 });
+psbt.addInput({
+    hash: '900b72ca70b8fea9cea4dd8fa0cbb3650da0a4a5ac04f18f1c5048d2c853cd8d',
+    index: 2,
+    nonWitnessUtxo: Buffer.from(previousRawTx, 'hex'),
+});
 psbt.addOutput({
-    address: "tb1qktqcm9kwyw43scrxlwpkml94rgjh89xhs7sm37",
+    address: "2N55dKSbYKmt75dvbr4pYjBu1JLfeSy3rz9",
     value: 5000000,
 });
 psbt.addOutput({
-    address: "tb1qu6am89dmhlz07fzsccak55vswp8lu97uv6w59m",
-    value: 4999780,
+    address: "n1kUSYA5CNJrLMCfLLAmKyCkDLuCZCRqoH",
+    value: 89900,
 });
 
-psbt.signInput(0, privkey);
+psbt.signInput(0, privkey0);
+psbt.signInput(1, privkey1);
+psbt.signInput(2, privkey2);
 
 psbt.validateSignaturesOfInput(0);
 psbt.finalizeAllInputs();

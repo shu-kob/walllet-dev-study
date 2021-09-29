@@ -30,3 +30,7 @@ getMultiSigKeys.js
 
 getSingleSigAddresses.js
 ```
+# 詳しい使い方
+
+以下をご覧ください。
+https://qiita.com/shu-kob/items/380e26eaee025edd6fcb

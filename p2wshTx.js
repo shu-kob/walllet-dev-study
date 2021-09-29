@@ -49,21 +49,21 @@ console.log('P2WSH address:\n' + p2wsh.address);
 
 const psbt = new bitcoin.Psbt({ network: bitcoinNetwork });
 psbt.addInput({
-    hash: '22ed59b3f8443a45fcdb80f3d4121b38876a4ff30e31b77e96b9aca62b24892f',
-    index: 1,
+    hash: '5ff70114e63214da1d1385935118cfb8791c17efffbdef88b3babd0ebc167839',
+    index: 0,
     witnessScript: p2wsh.redeem.output,
     witnessUtxo: {
     script: Buffer.from('0020' + bitcoin.crypto.sha256(p2ms.output).toString('hex'), 'hex'),
-    value: 10000000,
+    value: 8000000,
     },
 });
 psbt.addOutput({
-    address: "tb1q8zgpsl7qvcr6ye0c6njmutshr688whtd2jpdjd",
-    value: 3000000,
+    address: "2MwZhrfcLDFJX1PG2LhuUJPzDiqMFxzSQ4G",
+    value: 6000000,
 });
 psbt.addOutput({
-    address: "tb1q77hfx3crqmpjntkshv7ssyaz85lepe4x7mwurk",
-    value: 6999823,
+    address: "tb1qgxxkdf0undcc9l4eyz5grxxaw4dateuf0etze5d688prd2g6r07qgq9jdr",
+    value: 1999810,
 });
 
 psbt.signInput(0, privkey1)

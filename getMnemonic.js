@@ -1,12 +1,12 @@
 const bip39 = require('bip39');
 const fs = require("fs");
 
-function mnemonicToXprivXpub() {
+function getMnemonic() {
     const mnemonic = bip39.generateMnemonic(256);
     return mnemonic;
 }
 
-const mnemonic = mnemonicToXprivXpub();
+const mnemonic = getMnemonic();
 
 const data = `{\n  "mnemonic": "${mnemonic}"\n}`
 

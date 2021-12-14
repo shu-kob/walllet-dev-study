@@ -43,7 +43,7 @@ else if (bitcoinNetwork == TESTNET) {
 
 let account = "0"
 
-let nonChangeAddress = 0;
+let externalAddress = 0;
 let changeAddress = 1;
 
 function getPublicKey(xpub, isChange, addressIndex){
@@ -72,7 +72,7 @@ function getP2wpkhAddress(xpub, isChange, addressIndex){
     return address;
 }
 
-let isChange = nonChangeAddress;
+let isChange = externalAddress;
 
 console.log("External Addresses");
 

@@ -40,6 +40,12 @@ if (bitcoinNetwork == MAINNET) {
 else if (bitcoinNetwork == TESTNET) {
     coinType = "1";
 }
+else if (bitcoinNetwork == LITECOIN) {
+    coinType = "2";
+}
+else if (bitcoinNetwork == DOGECOIN) {
+    coinType = "3";
+}
 
 let account = "0"
 

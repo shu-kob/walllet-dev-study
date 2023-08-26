@@ -1,5 +1,13 @@
 # walllet-dev-study
 
+## 注意
+
+`walllet-dev-study`はリニューアルして、下記リポジトリに移動しました。
+
+- https://github.com/shu-kob/study-dev-wallet
+
+こちらをお使いください。
+
 ## How to use
 
 ```
